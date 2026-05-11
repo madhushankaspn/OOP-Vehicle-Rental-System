@@ -30,15 +30,17 @@ body {
 
 .title {
   text-align: center;
-  font-size: 2.8rem; /* ටිකක් විශාල කළා */
+  font-size: 2.8rem;
   font-weight: 700;
   margin-bottom: 40px;
-  /* 1. පේනවා මදි නිසා Gradient එක තව දීප්තිමත් කළා */
   background: linear-gradient(135deg, #7dd3fc, #c7d2fe);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* 2. තවත් හොඳින් පේන්න subtle glow එකක් එකතු කළා */
   text-shadow: 0 0 15px rgba(125, 211, 252, 0.4);
+
+  /* අලුතින් එකතු කළ යුතු පේළි දෙක */
+  padding-bottom: 10px;
+  line-height: 1.2;
 }
 
 .section-title {
@@ -180,4 +182,67 @@ body {
   margin-top: 30px;
   font-weight: 600;
   font-size: 1.2rem;
+}
+
+/* ADMIN SECTION STYLES */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btn-admin {
+  background: transparent;
+  color: #c084fc;
+  border: 1px dashed #c084fc;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+}
+
+.btn-admin:hover {
+  background: rgba(192, 132, 252, 0.1);
+}
+
+.admin-form {
+  background: rgba(15, 23, 42, 0.8);
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid #334155;
+  margin-bottom: 30px;
+}
+
+.form-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-control label {
+  color: #94a3b8;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.form-control input, .form-control select {
+  background: #1e293b;
+  border: 1px solid #475569;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.form-control input:focus, .form-control select:focus {
+  border-color: #c084fc;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #c084fc, #9333ea);
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
 }

@@ -1,37 +1,60 @@
 package com.example.vehicle_rental_api.controller;
 
+import com.example.vehicle_rental_api.model.Vehicle;
 import com.example.vehicle_rental_api.model.Car;
 import com.example.vehicle_rental_api.model.Motorcycle;
-import com.example.vehicle_rental_api.model.Vehicle;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.vehicle_rental_api.repository.VehicleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-// 1. මේක තමයි අපේ "වේටර්" කියලා Spring Boot එකට අඳුන්වලා දෙන වචනය
 @RestController
-// 2. මේ වේටර් ඉන්නේ මොන මේසේ ළඟද කියන ලිපිනය
 @RequestMapping("/api/vehicles")
-// 3. ඉස්සරහට අපි හදන React ඇප් එකට මේකට කතා කරන්න අවසර දෙනවා (CORS Error එක නැති කරන්න)
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*") // React එකට අවසර දීම
 public class VehicleController {
 
-    // අපිට තවම Database එකක් නැති නිසා අපි තාවකාලිකව වාහන ටික List එකක දාගන්නවා
-    private List<Vehicle> vehicleList = new ArrayList<>();
+    // මැජික් එක! අපි හදපු Repository එක මෙතනට සම්බන්ධ කරනවා
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
-    // මේක Constructor එක. මේ Class එක හැදෙනකොටම අපි වාහන දෙකක් List එකට දානවා
-    public VehicleController() {
-        vehicleList.add(new Car("C001", "Toyota Premio", 5000.0, true));
-        vehicleList.add(new Motorcycle("M001", "Honda Hornet", 2000.0, true));
-    }
-
-    // 4. පාරිභෝගිකයා "වාහන ලිස්ට් එක දෙන්න" කියලා GET Request එකක් එවපුවාම වැඩ කරන Method එක
+    // 1. READ (GET) - Database එකේ තියෙන වාහන ඔක්කොම ගන්න
     @GetMapping
     public List<Vehicle> getAllVehicles() {
-        // අපි මේ යවන්නේ Java List එකක් වුණාට, @RestController එක නිසා මේක ඉබේම JSON වලට හැරිලා යනවා!
-        return vehicleList;
+        // Database එකෙන් ඔක්කොම වාහන ටික අදිනවා
+        List<Vehicle> vehicles = vehicleRepository.findAll();
+
+        // ඔයාගේ අලුත් Database එක තාම හිස් නිසා, මුලින්ම වාහන දෙකක් ඉබේම Save වෙන්න මම පොඩි කෑල්ලක් දැම්මා.
+        if (vehicles.isEmpty()) {
+            Car car = new Car("V001", "Toyota Premio", 5000.0, true);
+            Motorcycle bike = new Motorcycle("V002", "Honda Hornet", 2000.0, true);
+
+            vehicleRepository.save(car);
+            vehicleRepository.save(bike);
+
+            // Save කළාට පස්සේ ආයෙත් Database එකෙන් දත්ත ටික ගන්නවා
+            vehicles = vehicleRepository.findAll();
+        }
+
+        return vehicles;
+    }
+
+    // 2. CREATE (POST) - අලුත් කාර් එකක් Database එකට දාන්න
+    @PostMapping("/car")
+    public Vehicle addCar(@RequestBody Car car) {
+        return vehicleRepository.save(car);
+    }
+
+    // අලුත් යතුරුපැදියක් Database එකට දාන්න
+    @PostMapping("/motorcycle")
+    public Vehicle addMotorcycle(@RequestBody Motorcycle motorcycle) {
+        return vehicleRepository.save(motorcycle);
+    }
+
+    // 3. DELETE - වාහනයක් Database එකෙන් මකන්න
+    @DeleteMapping("/{id}")
+    public String deleteVehicle(@PathVariable String id) {
+        vehicleRepository.deleteById(id);
+        return "වාහනය සාර්ථකව මකා දැමුවා!";
     }
 }

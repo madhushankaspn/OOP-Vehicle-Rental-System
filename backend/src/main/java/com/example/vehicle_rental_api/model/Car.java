@@ -9,6 +9,8 @@ public class Car extends Vehicle {
 
     private boolean hasAirConditioning;
 
+
+    public Car() {}
     public Car(String vehicleId, String brand, double baseRentalPrice, boolean hasAirConditioning) {
         super(vehicleId, brand, baseRentalPrice);
         this.hasAirConditioning = hasAirConditioning;

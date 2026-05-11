@@ -9,6 +9,8 @@ public class Motorcycle extends Vehicle {
 
     private boolean includesHelmet;
 
+
+    public Motorcycle() {}
     public Motorcycle(String vehicleId, String brand, double baseRentalPrice, boolean includesHelmet) {
         super(vehicleId, brand, baseRentalPrice);
         this.includesHelmet = includesHelmet;
