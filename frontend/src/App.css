@@ -30,12 +30,15 @@ body {
 
 .title {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2.8rem; /* ටිකක් විශාල කළා */
   font-weight: 700;
   margin-bottom: 40px;
-  background: linear-gradient(135deg, #38bdf8, #818cf8);
+  /* 1. පේනවා මදි නිසා Gradient එක තව දීප්තිමත් කළා */
+  background: linear-gradient(135deg, #7dd3fc, #c7d2fe);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  /* 2. තවත් හොඳින් පේන්න subtle glow එකක් එකතු කළා */
+  text-shadow: 0 0 15px rgba(125, 211, 252, 0.4);
 }
 
 .section-title {
@@ -59,42 +62,41 @@ body {
   padding: 25px;
   cursor: pointer;
   transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
   text-align: center;
 }
 
 .vehicle-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
   border-color: rgba(56, 189, 248, 0.5);
 }
 
 .vehicle-card.selected {
   border-color: #38bdf8;
   background: rgba(56, 189, 248, 0.1);
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
 }
 
-.vehicle-card h3 {
-  margin: 0 0 10px 0;
-  font-size: 1.5rem;
-  color: #f8fafc;
-}
+.vehicle-card h3 { margin: 0 0 10px 0; font-size: 1.5rem; color: #f8fafc; }
+.vehicle-card p { margin: 0; color: #38bdf8; font-weight: 600; font-size: 1.1rem; }
 
-.vehicle-card p {
-  margin: 0;
-  color: #38bdf8;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
+/* CALCULATOR SECTION */
 .calculator-section {
   background: rgba(15, 23, 42, 0.6);
   border-radius: 16px;
   padding: 30px;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
+
+/* 3. Calculator එකේ header එකට style එකක් (Back button එක දාන්න) */
+.calc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  border-bottom: 1px dashed #334155;
+  padding-bottom: 15px;
+}
+
+.calc-header .section-title { margin-bottom: 0; }
 
 .input-group {
   margin-bottom: 25px;
@@ -106,78 +108,76 @@ body {
   border-radius: 12px;
 }
 
-.input-group label {
-  font-size: 1.1rem;
-  color: #cbd5e1;
-  font-weight: 600;
-}
-
 .days-input {
-  background: #0f172a;
-  border: 1px solid #334155;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  width: 100px;
-  text-align: center;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.days-input:focus {
-  border-color: #38bdf8;
+  background: #0f172a; border: 1px solid #334155; color: white;
+  padding: 10px 15px; border-radius: 8px; font-size: 1.2rem; width: 100px; text-align: center;
 }
 
 .checkbox-label {
+  display: flex; align-items: center; gap: 15px; cursor: pointer;
+  font-size: 1.1rem; color: #cbd5e1; padding: 15px 20px;
+  background: #1e293b; border-radius: 12px; margin-bottom: 15px;
+}
+
+.discount-text { color: #10b981; font-size: 0.95rem; font-weight: 600; }
+
+.total-section { text-align: center; }
+.total-label { color: #94a3b8; font-size: 1.2rem; margin-bottom: 5px; }
+.total-amount { font-size: 3rem; font-weight: 700; color: #10b981; margin: 0; }
+
+/* 4. අලුත් බොත්තම් වලට Styles (Buttons Styles) */
+.button-group {
   display: flex;
-  align-items: center;
+  justify-content: flex-end;
   gap: 15px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  color: #cbd5e1;
-  padding: 15px 20px;
-  background: #1e293b;
-  border-radius: 12px;
-  transition: background 0.3s ease;
-  margin-bottom: 15px;
-}
-
-.checkbox-label:hover {
-  background: #334155;
-}
-
-.checkbox-label input {
-  width: 22px;
-  height: 22px;
-  accent-color: #38bdf8;
-  cursor: pointer;
-}
-
-.discount-text {
-  color: #10b981;
-  font-size: 0.95rem;
-  margin: -5px 0 15px 10px;
-  font-weight: 600;
-}
-
-.total-section {
   margin-top: 30px;
-  padding-top: 25px;
-  border-top: 1px dashed #334155;
-  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.total-label {
-  color: #94a3b8;
-  font-size: 1.2rem;
-  margin-bottom: 5px;
+.btn {
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
 }
 
-.total-amount {
-  font-size: 3rem;
-  font-weight: 700;
+.btn-confirm {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+}
+
+.btn-confirm:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+}
+
+.btn-back {
+  background: transparent;
+  color: #cbd5e1;
+  border: 1px solid #334155;
+}
+
+.btn-back:hover {
+  background: #1e293b;
+  border-color: #94a3b8;
+  color: white;
+}
+
+/* Confirmation Message Box */
+.confirmation-box {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid #10b981;
   color: #10b981;
-  margin: 0;
-  text-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 30px;
+  font-weight: 600;
+  font-size: 1.2rem;
 }
